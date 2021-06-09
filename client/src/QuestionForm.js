@@ -17,6 +17,7 @@ const QuestionForm = () => {
     <>
       <Form
         onSubmit={() => {
+          setSelectedAnswer("");
           setCounterQuestion((prev) => prev + 1);
         }}
       >
