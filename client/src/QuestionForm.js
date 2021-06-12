@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Radio } from "semantic-ui-react";
-import questions from "./data";
 
-const QuestionForm = () => {
+const QuestionForm = (props) => {
   const [counterQuestion, setCounterQuestion] = useState(1);
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
@@ -22,10 +21,10 @@ const QuestionForm = () => {
         }}
       >
         <p>
-          Question {counterQuestion} from {questions.length}
+          Question {counterQuestion} from {props.questions.length}
         </p>
-        <p>{questions[counterQuestion - 1].question}</p>
-        {questions[counterQuestion - 1].options.map((option, index) => {
+        <p>{props.questions[counterQuestion - 1].question}</p>
+        {props.questions[counterQuestion - 1].options.map((option, index) => {
           return (
             <Form.Field key={index}>
               <Radio
