@@ -1,16 +1,15 @@
 const express = require("express");
-const path = require("path");
-const PORT = process.env.PORT || 3001;
-
-const app = express();
-
-//////////////////////////////////////////////////////////////////////////
-
 const cors = require("cors");
+const path = require("path");
+const mongoose = require("mongoose");
 
 require("dotenv").config();
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+//////////////////////////////////////////////////////////////////////////
+
 app.use(cors());
-const mongoose = require("mongoose");
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
