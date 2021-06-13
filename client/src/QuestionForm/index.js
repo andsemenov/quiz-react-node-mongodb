@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Form, Radio } from "semantic-ui-react";
+import { Button, Form, Radio, Divider } from "semantic-ui-react";
+import "./style.css";
 
 const QuestionForm = (props) => {
   const [counterQuestion, setCounterQuestion] = useState(1);
@@ -15,6 +16,7 @@ const QuestionForm = (props) => {
   return (
     <>
       <Form
+        className="question-form"
         onSubmit={() => {
           setSelectedAnswer("");
           setCounterQuestion((prev) => prev + 1);
@@ -23,6 +25,7 @@ const QuestionForm = (props) => {
         <p>
           Question {counterQuestion} from {props.questions.length}
         </p>
+        <Divider fitted />
         <p>{props.questions[counterQuestion - 1].question}</p>
         {props.questions[counterQuestion - 1].options.map((option, index) => {
           return (
@@ -37,8 +40,9 @@ const QuestionForm = (props) => {
             </Form.Field>
           );
         })}
-
-        <Button type="submit">Next</Button>
+        <Button id="btn-next" type="submit">
+          Next
+        </Button>
       </Form>
     </>
   );
