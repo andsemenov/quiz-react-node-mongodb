@@ -10,7 +10,6 @@ const QuestionForm = (props) => {
 
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
-    console.log("stop press");
   };
 
   return (
