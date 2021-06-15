@@ -22,7 +22,6 @@ const App = () => {
     fetchData();
   }, [questions.length]);
 
-  console.log(questions);
   return (
     <>
       {isLoading ? <h1>Loading...</h1> : <QuestionForm questions={questions} />}
