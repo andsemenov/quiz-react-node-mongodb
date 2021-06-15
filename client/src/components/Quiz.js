@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 //import "./App.css";
 import QuestionForm from "./QuestionForm/index";
 
-const App = () => {
+const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,4 +29,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Quiz;
