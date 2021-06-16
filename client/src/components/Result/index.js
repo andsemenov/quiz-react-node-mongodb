@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 const ResultForm = (props) => {
-  console.log(props.history.location.props);
+  console.log(props.match.params.answered);
+  console.log(props.match.params.questions);
   return (
     <>
       <p>
-        You answered {props.history.location.props.answered} from{" "}
-        {props.history.location.props.questions}
+        You answered {props.match.params.answered} from{" "}
+        {props.match.params.questions}
       </p>
       <Link id="btn-try-again" type="submit" to="/">
         Try again
