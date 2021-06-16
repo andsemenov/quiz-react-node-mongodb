@@ -57,6 +57,17 @@ const QuestionForm = (props) => {
         </Form>
       ) : (
         <Redirect
+          to={`/result/${counterRightAnswers}/${props.questions.length}`}
+        />
+      )}
+    </>
+  );
+};
+
+export default QuestionForm;
+
+/*  (
+        <Redirect
           to={{
             pathname: "/result",
             props: {
@@ -65,9 +76,4 @@ const QuestionForm = (props) => {
             },
           }}
         />
-      )}
-    </>
-  );
-};
-
-export default QuestionForm;
+      )} */
