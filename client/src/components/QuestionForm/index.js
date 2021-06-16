@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Radio, Divider } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import Result from "../Result";
 import "./style.css";
 
 const QuestionForm = (props) => {
   const [counterQuestion, setCounterQuestion] = useState(1);
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  console.log(selectedAnswer);
+  const [counterRightAnswers, setCounterRightAnswers] = useState(0);
+
+  useEffect(() => {
+    if (selectedAnswer !== "") {
+      if (
+        props.questions[counterQuestion - 1].options.indexOf(selectedAnswer) ===
+        props.questions[counterQuestion - 1].rightAnswer
+      ) {
+        setCounterRightAnswers((prev) => prev + 1);
+      }
+    }
+  }, [selectedAnswer]);
 
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
@@ -46,11 +56,13 @@ const QuestionForm = (props) => {
           </Button>
         </Form>
       ) : (
-        /*      <Redirect to="/result" /> */
         <Redirect
           to={{
             pathname: "/result",
-            props: { answered: "123", questions: props.questions.length },
+            props: {
+              answered: counterRightAnswers,
+              questions: props.questions.length,
+            },
           }}
         />
       )}
