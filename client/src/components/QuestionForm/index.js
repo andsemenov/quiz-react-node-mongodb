@@ -17,6 +17,9 @@ const QuestionForm = (props) => {
         setCounterRightAnswers((prev) => prev + 1);
       }
     }
+    sessionStorage.setItem("right", JSON.stringify(counterRightAnswers));
+
+    sessionStorage.setItem("total", JSON.stringify(props.questions.length));
   }, [selectedAnswer]);
 
   const handleChange = (event, { value }) => {
@@ -56,24 +59,10 @@ const QuestionForm = (props) => {
           </Button>
         </Form>
       ) : (
-        <Redirect
-          to={`/result/${counterRightAnswers}/${props.questions.length}`}
-        />
+        <Redirect to="/result" />
       )}
     </>
   );
 };
 
 export default QuestionForm;
-
-/*  (
-        <Redirect
-          to={{
-            pathname: "/result",
-            props: {
-              answered: counterRightAnswers,
-              questions: props.questions.length,
-            },
-          }}
-        />
-      )} */

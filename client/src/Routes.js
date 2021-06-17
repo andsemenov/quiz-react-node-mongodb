@@ -7,7 +7,7 @@ const Routes = () => {
   return (
     <Router>
       <Route path="/" exact component={Quiz} />
-      <Route path="/result/:answered/:questions" exact component={Result} />
+      <Route path="/result" exact component={Result} />
     </Router>
   );
 };
