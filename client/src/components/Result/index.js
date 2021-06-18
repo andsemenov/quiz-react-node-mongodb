@@ -5,25 +5,27 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 const ResultForm = () => {
-  const [ans, setAns] = useState("");
-  const [quest, setQuest] = useState("");
+  const [answeredRight, setAnsweredRight] = useState("");
+  const [questionsTotal, setQuestionsTotal] = useState("");
 
   useEffect(() => {
-    setAns(JSON.parse(sessionStorage.getItem("right")));
+    setAnsweredRight(JSON.parse(sessionStorage.getItem("right")));
 
-    setQuest(JSON.parse(sessionStorage.getItem("total")));
+    setQuestionsTotal(JSON.parse(sessionStorage.getItem("total")));
   }, []);
 
   return (
-    <>
-      <p>
-        You answered {ans} from
-        {quest}
-      </p>
-      <Link id="btn-try-again" type="submit" to="/">
-        Try again
-      </Link>
-    </>
+    <div className="quiz-result">
+      <div className="result">
+        <h1>A good try!</h1>
+        <p>
+          You answered {answeredRight} questions from {questionsTotal}
+        </p>
+        <Link id="btn-try-again" type="submit" to="/">
+          Try again
+        </Link>
+      </div>
+    </div>
   );
 };
 
