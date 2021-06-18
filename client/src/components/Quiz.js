@@ -9,9 +9,7 @@ const Quiz = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:3001/questions", {
-          mode: "no-cors",
-        });
+        const response = await fetch("http://localhost:3001/questions");
         const json = await response.json();
         setQuestions(json);
         if (questions.length > 0) {
