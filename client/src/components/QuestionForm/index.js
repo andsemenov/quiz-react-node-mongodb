@@ -36,11 +36,11 @@ const QuestionForm = (props) => {
             setCounterQuestion((prev) => prev + 1);
           }}
         >
-          <p>
+          <h3>
             Question {counterQuestion} from {props.questions.length}
-          </p>
+          </h3>
           <Divider fitted />
-          <p>{props.questions[counterQuestion - 1].question}</p>
+          <p id="question">{props.questions[counterQuestion - 1].question}</p>
           {props.questions[counterQuestion - 1].options.map((option, index) => {
             return (
               <Form.Field key={index}>
@@ -54,6 +54,7 @@ const QuestionForm = (props) => {
               </Form.Field>
             );
           })}
+          <Divider fitted />
           <Button id="btn-next" type="submit">
             Next
           </Button>
