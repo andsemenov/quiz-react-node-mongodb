@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Radio, Divider } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import Countdown from "../Countdown/index";
 
 import "./style.css";
 
@@ -9,6 +8,7 @@ const QuestionForm = (props) => {
   const [counterQuestion, setCounterQuestion] = useState(1);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [counterRightAnswers, setCounterRightAnswers] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(30);
 
   useEffect(() => {
     if (selectedAnswer !== "") {
@@ -22,7 +22,18 @@ const QuestionForm = (props) => {
     sessionStorage.setItem("right", JSON.stringify(counterRightAnswers));
 
     sessionStorage.setItem("total", JSON.stringify(props.questions.length));
-  }, [selectedAnswer]);
+
+    if (!timeLeft) return;
+
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+
+    // clear interval on re-render to avoid memory leaks
+    return () => clearInterval(intervalId);
+    // add timeLeft as a dependency to re-rerun the effect
+    // when we update it
+  }, [selectedAnswer, timeLeft]);
 
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
@@ -36,16 +47,13 @@ const QuestionForm = (props) => {
           onSubmit={() => {
             setSelectedAnswer("");
             setCounterQuestion((prev) => prev + 1);
+            setTimeLeft(30);
           }}
         >
           <h3>
             Question {counterQuestion} from {props.questions.length}
           </h3>
-          <div className="countdown">
-            <p>Time left</p>
-            <Countdown seconds={30} />
-            <p>seconds</p>
-          </div>
+          <p className="countdown">Time left: {timeLeft}</p>
           <Divider fitted />
           <p id="question">{props.questions[counterQuestion - 1].question}</p>
           {props.questions[counterQuestion - 1].options.map((option, index) => {
@@ -74,3 +82,5 @@ const QuestionForm = (props) => {
 };
 
 export default QuestionForm;
+
+/* return <p>{timeLeft}</p>; */
