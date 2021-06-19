@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Radio, Divider } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
+import Countdown from "../Countdown/index";
+
 import "./style.css";
 
 const QuestionForm = (props) => {
@@ -39,6 +41,11 @@ const QuestionForm = (props) => {
           <h3>
             Question {counterQuestion} from {props.questions.length}
           </h3>
+          <div className="countdown">
+            <p>Time left</p>
+            <Countdown seconds={30} />
+            <p>seconds</p>
+          </div>
           <Divider fitted />
           <p id="question">{props.questions[counterQuestion - 1].question}</p>
           {props.questions[counterQuestion - 1].options.map((option, index) => {
