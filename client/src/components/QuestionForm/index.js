@@ -22,8 +22,14 @@ const QuestionForm = (props) => {
     sessionStorage.setItem("right", JSON.stringify(counterRightAnswers));
 
     sessionStorage.setItem("total", JSON.stringify(props.questions.length));
-
-    if (!timeLeft) return;
+    //////////////////////////////////////////
+    if (!timeLeft) {
+      setSelectedAnswer("");
+      setCounterQuestion((prev) => prev + 1);
+      setTimeLeft(30);
+      /* 
+      return; */
+    }
 
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
@@ -33,7 +39,7 @@ const QuestionForm = (props) => {
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [selectedAnswer, timeLeft]);
+  }, [selectedAnswer, timeLeft, setCounterQuestion]);
 
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
