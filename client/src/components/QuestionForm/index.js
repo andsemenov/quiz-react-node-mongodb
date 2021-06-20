@@ -22,22 +22,17 @@ const QuestionForm = (props) => {
     sessionStorage.setItem("right", JSON.stringify(counterRightAnswers));
 
     sessionStorage.setItem("total", JSON.stringify(props.questions.length));
-    //////////////////////////////////////////
+  }, [selectedAnswer, setCounterQuestion]);
+
+  useEffect(() => {
     if (!timeLeft) {
       moveToNewQuestion();
-      /* 
-      return; */
     }
-
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-
-    // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
-    // add timeLeft as a dependency to re-rerun the effect
-    // when we update it
-  }, [selectedAnswer, timeLeft, setCounterQuestion]);
+  }, [timeLeft]);
 
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
