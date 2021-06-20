@@ -24,9 +24,7 @@ const QuestionForm = (props) => {
     sessionStorage.setItem("total", JSON.stringify(props.questions.length));
     //////////////////////////////////////////
     if (!timeLeft) {
-      setSelectedAnswer("");
-      setCounterQuestion((prev) => prev + 1);
-      setTimeLeft(30);
+      moveToNewQuestion();
       /* 
       return; */
     }
@@ -45,17 +43,16 @@ const QuestionForm = (props) => {
     setSelectedAnswer(value);
   };
 
+  const moveToNewQuestion = () => {
+    setSelectedAnswer("");
+    setCounterQuestion((prev) => prev + 1);
+    setTimeLeft(30);
+  };
+
   return (
     <>
       {counterQuestion <= props.questions.length ? (
-        <Form
-          className="question-form"
-          onSubmit={() => {
-            setSelectedAnswer("");
-            setCounterQuestion((prev) => prev + 1);
-            setTimeLeft(30);
-          }}
-        >
+        <Form className="question-form" onSubmit={moveToNewQuestion}>
           <h3>
             Question {counterQuestion} from {props.questions.length}
           </h3>
@@ -88,5 +85,3 @@ const QuestionForm = (props) => {
 };
 
 export default QuestionForm;
-
-/* return <p>{timeLeft}</p>; */
