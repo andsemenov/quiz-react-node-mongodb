@@ -33,6 +33,7 @@ const QuestionForm = (props) => {
     setSelectedAnswer("");
     setCounterQuestion((prev) => prev + 1);
     setActiveCounter(false);
+    sessionStorage.removeItem("currentTimer");
   };
 
   return (

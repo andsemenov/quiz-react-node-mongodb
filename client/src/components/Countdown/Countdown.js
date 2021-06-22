@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const Countdown = (props) => {
-  const [timeLeft, setTimeLeft] = useState(props.seconds);
+  const [timeLeft, setTimeLeft] = useState(
+    JSON.parse(sessionStorage.getItem("currentTimer")) || props.seconds
+  );
 
   useEffect(() => {
     if (!timeLeft) {
@@ -12,12 +14,13 @@ const Countdown = (props) => {
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-
+    sessionStorage.setItem("currentTimer", JSON.stringify(timeLeft));
     return () => clearInterval(intervalId);
   }, [timeLeft, props]);
 
   React.useEffect(() => {
     if (!props.active) {
+      sessionStorage.removeItem("currentTimer");
       setTimeLeft(props.seconds);
     }
   }, [props]);
