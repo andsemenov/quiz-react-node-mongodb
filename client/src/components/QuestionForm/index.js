@@ -12,18 +12,10 @@ const QuestionForm = (props) => {
   const [activeAcounter, setActiveCounter] = React.useState(true);
 
   useEffect(() => {
-    if (selectedAnswer !== "") {
-      if (
-        props.questions[counterQuestion - 1].options.indexOf(selectedAnswer) ===
-        props.questions[counterQuestion - 1].rightAnswer
-      ) {
-        setCounterRightAnswers((prev) => prev + 1);
-      }
-    }
     sessionStorage.setItem("right", JSON.stringify(counterRightAnswers));
 
     sessionStorage.setItem("total", JSON.stringify(props.questions.length));
-  }, [selectedAnswer, setCounterQuestion]);
+  }, [props, counterRightAnswers]);
 
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
@@ -34,6 +26,14 @@ const QuestionForm = (props) => {
     setCounterQuestion((prev) => prev + 1);
     setActiveCounter(false);
     sessionStorage.removeItem("currentTimer");
+    if (selectedAnswer !== "") {
+      if (
+        props.questions[counterQuestion - 1].options.indexOf(selectedAnswer) ===
+        props.questions[counterQuestion - 1].rightAnswer
+      ) {
+        setCounterRightAnswers((prev) => prev + 1);
+      }
+    }
   };
 
   return (
@@ -60,7 +60,7 @@ const QuestionForm = (props) => {
                   label={option}
                   value={option}
                   checked={selectedAnswer === option}
-                  disabled={selectedAnswer !== ""}
+                  /*         disabled={selectedAnswer !== ""} */
                   onChange={handleChange}
                 />
               </Form.Field>
