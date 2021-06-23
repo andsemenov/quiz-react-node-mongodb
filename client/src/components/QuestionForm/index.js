@@ -25,18 +25,6 @@ const QuestionForm = (props) => {
     sessionStorage.setItem("total", JSON.stringify(props.questions.length));
   }, [selectedAnswer, setCounterQuestion]);
 
-
-  useEffect(() => {
-    if (!timeLeft) {
-      moveToNewQuestion();
-    }
-    const intervalId = setInterval(() => {
-      setTimeLeft(timeLeft - 1);
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, [timeLeft]);
-
-
   const handleChange = (event, { value }) => {
     setSelectedAnswer(value);
   };
